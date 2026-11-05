@@ -35,9 +35,9 @@ class BooksScreen extends StatelessWidget {
             trailing: cart.contains(b)
                 ? const Text('Added')
                 : OutlinedButton(
-              onPressed: () => onAdd(b),
-              child: const Text('Add'),
-            ),
+                    onPressed: () => onAdd(b),
+                    child: const Text('Add'),
+                  ),
           );
         },
       ),
