@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -6,6 +7,8 @@ import 'package:http/testing.dart';
 import 'package:practice13/core/api/api_client.dart';
 import 'package:practice13/core/api/api_exception.dart';
 import 'package:practice13/features/users/user_repository.dart';
+
+import '../../fakes/sample_json.dart';
 
 UserRepository repoWith(MockClientHandler handler) {
   return HttpUserRepository(ApiClient(MockClient(handler)));
@@ -33,6 +36,25 @@ void main() {
       );
 
       expect(repo.getById(1), throwsA(isA<NoConnectionException>()));
+    });
+  });
+
+  group('HttpUserRepository parsing', () {
+    test('getAll parses a valid list', () async {
+      final body = jsonEncode([sampleUserJson()]);
+      final repo = repoWith((_) async => http.Response(body, 200));
+
+      final result = await repo.getAll();
+
+      expect(result.items.length, 1);
+      expect(result.fromCache, isFalse);
+    });
+
+    test('lat as a number -> BadResponseException', () {
+      final body = jsonEncode([sampleUserJson(lat: -37.3159)]);
+      final repo = repoWith((_) async => http.Response(body, 200));
+
+      expect(repo.getAll(), throwsA(isA<BadResponseException>()));
     });
   });
 }

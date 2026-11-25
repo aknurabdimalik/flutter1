@@ -41,4 +41,12 @@ void main() {
       expect(() => User.fromJson(json), throwsA(isA<TypeError>()));
     });
   });
+
+  group('Geo.fromJson', () {
+    test('lat as a number (planted bug) throws TypeError', () {
+      final json = <String, dynamic>{'lat': -37.3159, 'lng': '81.1496'};
+
+      expect(() => Geo.fromJson(json), throwsA(isA<TypeError>()));
+    });
+  });
 }
