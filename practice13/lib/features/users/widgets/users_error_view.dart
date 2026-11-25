@@ -3,11 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../core/api/api_exception.dart';
 
 class UsersErrorView extends StatelessWidget {
-  const UsersErrorView({
-    super.key,
-    required this.error,
-    required this.onRetry,
-  });
+  const UsersErrorView({super.key, required this.error, required this.onRetry});
 
   final ApiException error;
   final VoidCallback onRetry;

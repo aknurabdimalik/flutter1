@@ -21,9 +21,7 @@ class UsersCache {
     if (raw == null) return null;
     try {
       final list = jsonDecode(raw) as List<dynamic>;
-      return list
-          .map((e) => User.fromJson(e as Map<String, dynamic>))
-          .toList();
+      return list.map((e) => User.fromJson(e as Map<String, dynamic>)).toList();
     } on Object {
       return null;
     }

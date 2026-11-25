@@ -21,7 +21,7 @@ class ApiClient {
 
   Future<dynamic> post(String path, Map<String, dynamic> body) async {
     final response = await _send(
-          () => _client.post(
+      () => _client.post(
         Uri.https(host, path),
         headers: {'Content-Type': 'application/json; charset=UTF-8'},
         body: jsonEncode(body),

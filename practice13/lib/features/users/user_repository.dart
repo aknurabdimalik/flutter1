@@ -21,7 +21,7 @@ class HttpUserRepository implements UserRepository {
     try {
       final json = await _api.get('/users');
       final users = _parse(
-            () => (json as List<dynamic>)
+        () => (json as List<dynamic>)
             .map((e) => User.fromJson(e as Map<String, dynamic>))
             .toList(),
       );

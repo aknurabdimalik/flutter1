@@ -18,7 +18,7 @@ void main() {
   group('HttpUserRepository error mapping', () {
     test('404 -> NotFoundException', () {
       final repo = repoWith(
-            (_) async => http.Response('{"error":"gone"}', 404),
+        (_) async => http.Response('{"error":"gone"}', 404),
       );
 
       expect(repo.getById(99), throwsA(isA<NotFoundException>()));
@@ -31,9 +31,7 @@ void main() {
     });
 
     test('SocketException -> NoConnectionException', () {
-      final repo = repoWith(
-            (_) async => throw const SocketException('down'),
-      );
+      final repo = repoWith((_) async => throw const SocketException('down'));
 
       expect(repo.getById(1), throwsA(isA<NoConnectionException>()));
     });

@@ -29,9 +29,9 @@ class UsersModel extends ChangeNotifier {
     return _items
         .where(
           (u) =>
-      u.name.toLowerCase().contains(q) ||
-          u.email.toLowerCase().contains(q),
-    )
+              u.name.toLowerCase().contains(q) ||
+              u.email.toLowerCase().contains(q),
+        )
         .toList();
   }
 

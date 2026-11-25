@@ -13,7 +13,10 @@ class UserDetailScreen extends StatelessWidget {
       appBar: AppBar(title: Text(user.name)),
       body: ListView(
         children: [
-          ListTile(title: const Text('Username'), subtitle: Text(user.username)),
+          ListTile(
+            title: const Text('Username'),
+            subtitle: Text(user.username),
+          ),
           ListTile(title: const Text('Email'), subtitle: Text(user.email)),
           ListTile(title: const Text('Phone'), subtitle: Text(user.phone)),
           ListTile(title: const Text('Website'), subtitle: Text(user.website)),
@@ -21,14 +24,12 @@ class UserDetailScreen extends StatelessWidget {
             title: const Text('Address'),
             subtitle: Text(
               '${user.address.street}, ${user.address.suite}, '
-                  '${user.address.city}, ${user.address.zipcode}',
+              '${user.address.city}, ${user.address.zipcode}',
             ),
           ),
           ListTile(
             title: const Text('Geo'),
-            subtitle: Text(
-              '${user.address.geo.lat}, ${user.address.geo.lng}',
-            ),
+            subtitle: Text('${user.address.geo.lat}, ${user.address.geo.lng}'),
           ),
         ],
       ),

@@ -61,7 +61,7 @@ class FakeUserRepository implements UserRepository {
   Future<User> getById(int id) async {
     await _simulate();
     return _users.firstWhere(
-          (u) => u.id == id,
+      (u) => u.id == id,
       orElse: () => throw const NotFoundException(),
     );
   }
