@@ -19,10 +19,12 @@ class HttpUserRepository implements UserRepository {
   @override
   Future<UsersResult> getAll() async {
     try {
-      final json = await _api.get('/users') as List<dynamic>;
-      final users = json
-          .map((e) => User.fromJson(e as Map<String, dynamic>))
-          .toList();
+      final json = await _api.get('/users');
+      final users = _parse(
+            () => (json as List<dynamic>)
+            .map((e) => User.fromJson(e as Map<String, dynamic>))
+            .toList(),
+      );
       await _cache?.save(users);
       return UsersResult(items: users);
     } on NoConnectionException {
@@ -35,12 +37,20 @@ class HttpUserRepository implements UserRepository {
   @override
   Future<User> getById(int id) async {
     final json = await _api.get('/users/$id');
-    return User.fromJson(json as Map<String, dynamic>);
+    return _parse(() => User.fromJson(json as Map<String, dynamic>));
   }
 
   @override
   Future<User> create(User draft) async {
     final json = await _api.post('/users', draft.toJson());
-    return User.fromJson(json as Map<String, dynamic>);
+    return _parse(() => User.fromJson(json as Map<String, dynamic>));
+  }
+
+  T _parse<T>(T Function() build) {
+    try {
+      return build();
+    } on TypeError catch (e) {
+      throw BadResponseException('users: unexpected field type ($e)');
+    }
   }
 }
