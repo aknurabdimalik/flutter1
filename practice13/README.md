@@ -1,17 +1,34 @@
-# practice13
+# practice13 — Where Things Go
 
-A new Flutter project.
+Users app (JSONPlaceholder) organised feature-first:
+`lib/core/` (api, storage) and `lib/features/<name>/`; `test/` mirrors `lib/`.
 
-## Getting Started
+Dependencies point down: screens -> models -> repositories -> ApiClient / disk.
+`tool/check_layers.sh` checks it with grep.
 
-This project is a starting point for a Flutter application.
+## Run
 
-A few resources to get you started if this is your first Flutter project:
+    flutter pub get
+    flutter run
+    flutter test
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+Demo mode (no network): in `lib/main.dart` swap the commented line with
+`FakeUserRepository()`.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Quality checklist
+
+### flutter analyze
+
+    PASTE the output here
+
+### dart format .
+
+    PASTE the output here
+
+### flutter test
+
+    PASTE the output here
+
+### tool/check_layers.sh
+
+    (nothing)
